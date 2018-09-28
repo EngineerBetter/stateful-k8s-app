@@ -25,6 +25,15 @@ class Web < Sinatra::Base
         env.fetch('SERVER_PORT', '*')
       ].join(':')
     end
+
+    def stop
+      ->() {
+        pid = Process.pid
+        signal = "INT"
+        puts "Killing process #{pid} with signal #{signal}"
+        Process.kill(signal, pid)
+      }
+    end
   end
 
   enable :sessions if ENV['REDIS_SERVICE_SERVICE_HOST'].nil?
@@ -41,5 +50,13 @@ class Web < Sinatra::Base
       @total_app_responses = REDIS.incr('total_app_responses')
     end
     erb :index
+  end
+
+  get '/crash' do
+    stop.call
+    %(
+      <h2>Oh no! I've crashed!</h2>
+      <h3><a href="/">Check if an app instance is available</a></h3>
+    )
   end
 end
