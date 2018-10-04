@@ -33,11 +33,11 @@ Visit the application at localhost:9292
 $ git clone git@github.com:EngineerBetter/stateful-k8s-app.git
 $ docker build -t engineerbetter/stateful-app .
 
-# Get the image of the recently build image
+# Get the image of the recently built image
 $ docker images
 
-# Run the image
-$ docker run <IMAGE ID>
+# Run the image and expose it on port 9292
+$ docker run -p 9292:9292 <IMAGE ID>
 ```
 
 Visit the app at 0.0.0.0:9292
