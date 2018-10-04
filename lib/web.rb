@@ -53,6 +53,7 @@ class Web < Sinatra::Base
   end
 
   get '/crash' do
+    REDIS.set("total_instance_#{addr}_responses", 0, :xx => true) if ENV['REDIS_SERVICE_SERVICE_HOST']
     stop.call
     %(
       <h2>Oh no! I've crashed!</h2>
