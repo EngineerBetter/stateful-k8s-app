@@ -36,17 +36,16 @@ class Web < Sinatra::Base
     end
   end
 
-  enable :sessions if ENV['REDIS_SERVICE_SERVICE_HOST'].nil?
+  enable :sessions
   get '/' do
+    session[:instance_responses] = 0 if session[:instance_responses].nil?
+    @total_instance_responses = session[:instance_responses] + 1
+    session[:instance_responses] = @total_instance_responses
     if ENV['REDIS_SERVICE_SERVICE_HOST'].nil?
-      session[:instance_responses] = 0 if session[:instance_responses].nil?
       session[:app_responses] = 0 if session[:app_responses].nil?
-      @total_instance_responses = session[:instance_responses] + 1
       @total_app_responses = session[:app_responses] + 1
-      session[:instance_responses] = @total_instance_responses
       session[:app_responses] = @total_app_responses
     else
-      @total_instance_responses = REDIS.incr("total_instance_#{addr}_responses")
       @total_app_responses = REDIS.incr('total_app_responses')
     end
     erb :index
