@@ -1,9 +1,9 @@
 source "https://rubygems.org"
-ruby ">= 2.2.9"
+ruby "~> 3.0.0"
 
 gem "redis"
 gem "redis-namespace"
-gem "sinatra"
+gem "sinatra", ">= 2.2.3"
 gem "thin"
 
 group :development, :test do
