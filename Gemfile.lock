@@ -40,7 +40,7 @@ GEM
     pry-byebug (3.10.1)
       byebug (~> 11.0)
       pry (>= 0.13, < 0.15)
-    rack (2.2.5)
+    rack (2.2.6.3)
     rack-protection (3.0.5)
       rack
     rack-test (2.0.2)
@@ -87,6 +87,7 @@ PLATFORMS
 DEPENDENCIES
   guard-rspec
   pry-byebug
+  rack (>= 2.2.6.3)
   rack-test
   redis
   redis-namespace
@@ -97,4 +98,4 @@ RUBY VERSION
    ruby 3.0.0p0
 
 BUNDLED WITH
-   2.4.2
+   2.4.8

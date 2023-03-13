@@ -1,6 +1,7 @@
 source "https://rubygems.org"
 ruby "~> 3.0.0"
 
+gem "rack", ">= 2.2.6.3"
 gem "redis"
 gem "redis-namespace"
 gem "sinatra", ">= 2.2.3"
